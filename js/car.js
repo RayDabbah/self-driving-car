@@ -5,7 +5,8 @@ class Car {
     height;
     controls;
     speed = 0;
-    friction = 0.5;
+    maxSpeed = 3;
+    friction = 0.03;
     acceleration = 0.2;
 
     constructor(x, y, width, height) {
@@ -25,6 +26,18 @@ class Car {
         }
         if (this.controls.reverse) {
             this.speed -= this.acceleration
+        }
+
+        if (this.speed > 0) {
+            this.speed = Math.min(this.speed, this.maxSpeed) - this.friction
+        }
+
+        if (this.speed < 0) {
+            this.speed = Math.max(-(this.maxSpeed / 2), (this.speed)) + this.friction / 2
+        }
+
+        if (Math.abs(this.speed) < this.friction) {
+            this.speed = 0
         }
         this.y -= this.speed
     }
