@@ -28,6 +28,13 @@ class Car {
             this.speed -= this.acceleration
         }
 
+        if(this.controls.left){
+            this.x--
+        }
+        if(this.controls.right){
+            this.x++
+        }
+
         if (this.speed > 0) {
             this.speed = Math.min(this.speed, this.maxSpeed) - this.friction
         }
