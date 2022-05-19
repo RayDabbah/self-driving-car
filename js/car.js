@@ -5,6 +5,7 @@ class Car {
     height;
     controls;
     speed = 0;
+    angle = 0;
     maxSpeed = 3;
     friction = 0.03;
     acceleration = 0.2;
@@ -28,31 +29,46 @@ class Car {
             this.speed -= this.acceleration
         }
 
-        if(this.controls.left){
-            this.x--
-        }
-        if(this.controls.right){
-            this.x++
-        }
 
         if (this.speed > 0) {
             this.speed = Math.min(this.speed, this.maxSpeed) - this.friction
         }
 
         if (this.speed < 0) {
-            this.speed = Math.max(-(this.maxSpeed / 2), (this.speed)) + this.friction / 2
+            this.speed = Math.max(-(this.maxSpeed / 2), (this.speed)) + this.friction
         }
+
 
         if (Math.abs(this.speed) < this.friction) {
             this.speed = 0
         }
-        this.y -= this.speed
+
+        if (this.speed !== 0) {
+            const flip = this.speed > 0 ? 1 : -1;
+
+
+            if (this.controls.left) {
+                this.angle += 0.03 * flip
+            }
+            if (this.controls.right) {
+                this.angle -=  0.03 * flip
+            }
+        }
+
+
+
+        this.x -= Math.sin(this.angle) * this.speed;
+        this.y -= Math.cos(this.angle) * this.speed;
     }
 
     draw(ctx) {
+        ctx.save()
+        ctx.translate(this.x, this.y)
+        ctx.rotate(-this.angle)
         ctx.beginPath()
-        ctx.rect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height)
+        ctx.rect(-this.width / 2, -this.height / 2, this.width, this.height)
         ctx.fill()
+        ctx.restore()
     }
 
 
