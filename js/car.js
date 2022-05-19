@@ -17,6 +17,8 @@ class Car {
         this.width = width;
         this.height = height;
         this.controls = new Controls();
+        this.carImage = new Image();
+        this.carImage.src = 'car.svg'
 
     }
 
@@ -48,10 +50,10 @@ class Car {
 
 
             if (this.controls.left) {
-                this.angle += 0.03 * flip
+                this.angle += 0.02 * flip
             }
             if (this.controls.right) {
-                this.angle -=  0.03 * flip
+                this.angle -=  0.02 * flip
             }
         }
 
@@ -62,12 +64,12 @@ class Car {
     }
 
     draw(ctx) {
+
+
         ctx.save()
         ctx.translate(this.x, this.y)
         ctx.rotate(-this.angle)
-        ctx.beginPath()
-        ctx.rect(-this.width / 2, -this.height / 2, this.width, this.height)
-        ctx.fill()
+        ctx.drawImage(this.carImage, -this.width / 2, -this.height / 2, this.width, this.height)
         ctx.restore()
     }
 

@@ -1,11 +1,11 @@
 const canvas = document.getElementById('road')
 
-canvas.width = '200'
+canvas.width = '400'
 
 const ctx = canvas.getContext('2d')
 
 
-const car = new Car(100, 200, 30, 50)
+const car = new Car(100, 500, 30, 50)
 
 animate();
 
