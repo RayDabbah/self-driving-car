@@ -6,7 +6,7 @@ class Car {
     controls;
     speed = 0;
     angle = 0;
-    maxSpeed = 3;
+    maxSpeed = 4;
     friction = 0.03;
     acceleration = 0.2;
 
