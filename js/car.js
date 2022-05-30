@@ -3,6 +3,7 @@ class Car {
     y;
     width;
     height;
+    sensor;
     controls;
     speed = 0;
     angle = 0;
@@ -20,10 +21,13 @@ class Car {
         this.carImage = new Image();
         this.carImage.src = 'car.svg'
 
+        this.sensor = new Sensor(this);
+
     }
 
     update() {
         this.#move();
+        this.sensor.update();
     }
 
 
@@ -74,6 +78,8 @@ class Car {
         ctx.rotate(-this.angle)
         ctx.drawImage(this.carImage, -this.width / 2, -this.height / 2, this.width, this.height)
         ctx.restore()
+
+        this.sensor.draw(ctx)
     }
 
 
